@@ -1,0 +1,27 @@
+deployment on: Render
+free tier
+connected to github repo:
+https://github.com/kilowulf/Email_Response_App/tree/master
+
+
+email response app:
+render project deploy page:
+ https://dashboard.render.com/web/srv-cjrtg7lv2qks73biss9g/logs
+
+deployed url:
+https://mass-mailer-service.onrender.com/
+
+MongoDB Atlas:
+MassMailerCluster0
+user:kilonow1275
+pass:iIBmm6dhAHMdGBfA
+
+connection string:
+mongodb+srv://kilonow1275:<password>@massmailercluster0.hubq7pc.mongodb.net/?retryWrites=true&w=majority
+
+Replace <password> with the password for the kilonow1275 user. Ensure any option params are URL encoded
+
+
+
+
+
