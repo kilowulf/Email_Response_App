@@ -12,7 +12,7 @@ require("./models/user");
 require("./services/passport");
 
 // connect to mongoDB
-mongoose.connect(keys.mongoURI);
+mongoose.connect(process.env.MONGO_URI);
 
 // Get the connection object
 const db = mongoose.connection;
@@ -38,7 +38,7 @@ app.use(
     // set duration of cookie milliseconds
     maxAge: 30 * 24 * 60 * 60 * 1000,
     // encrypt cookie
-    keys: [keys.cookieKey]
+    keys: [process.env.COOKIE_KEY]
   })
 );
 
@@ -53,7 +53,6 @@ require("./routes/auth_routes")(app);
 app.get("/", (req, res) => {
   res.send({ hi: "there" });
 });
-
 
 // stopped on video 34. Nodemon Setup
 
