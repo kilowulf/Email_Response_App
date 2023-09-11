@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const keys = require("./config/keys");
+// const keys = require("./config/keys");
 require("dotenv").config();
 // import mongo model class schema for user
 // NOTE: user model should be imported before being referenced by passport instance

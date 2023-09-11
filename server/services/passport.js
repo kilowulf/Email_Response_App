@@ -1,7 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 // import client keys object
-const keys = require("../config/keys.js");
+// const keys = require("../config/keys.js");
 const mongoose = require("mongoose");
 
 // import user model class schema
