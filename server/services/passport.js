@@ -7,6 +7,18 @@ const mongoose = require("mongoose");
 // import user model class schema
 const User = mongoose.model("users");
 
+passport.serializeUser((user, done) => {
+  // user.id is the mongo id
+  // use mongo id since users may have multiple provider id's
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
+
 // passportJs - authentication flow: facilitate OAuth (google authentication)
 //            - automates OAuth flow
 //            - uses two libraries: passport and passport strategy
@@ -32,10 +44,13 @@ passport.use(
       User.findOne({ googleId: profile.id }).then(existingUser => {
         if (existingUser) {
           // user has record
+          done(null, existingUser);
         } else {
           // user doesn't exist , need to generate record
           // save google profile id data in mongo user collection
-          new User({ googleId: profile.id }).save();
+          new User({ googleId: profile.id })
+            .save() // save record
+            .then(user => done(null, user)); // second user instance from callback
         }
       });
     }

@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 const keys = require("./config/keys");
 require("dotenv").config();
 // import mongo model class schema for user
@@ -30,6 +32,20 @@ db.on("disconnected", () => {
 
 const app = express();
 
+// middleware for cookie-session
+app.use(
+  cookieSession({
+    // set duration of cookie milliseconds
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    // encrypt cookie
+    keys: [keys.cookieKey]
+  })
+);
+
+// set passport to use cookies
+app.use(passport.initialize());
+app.use(passport.session());
+
 // calling function from auth_routes.js and passing app as argument
 require("./routes/auth_routes")(app);
 
@@ -37,6 +53,7 @@ require("./routes/auth_routes")(app);
 app.get("/", (req, res) => {
   res.send({ hi: "there" });
 });
+
 
 // stopped on video 34. Nodemon Setup
 
