@@ -34,25 +34,25 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback"
+      callbackURL: "/auth/google/callback",
+      proxy: true // allows for hosting on third parties / proxies
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       console.log("access token", accessToken);
       console.log("refresh token", refreshToken);
       console.log("profile", profile);
       // Query user collection for google id
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          // user has record
-          done(null, existingUser);
-        } else {
-          // user doesn't exist , need to generate record
-          // save google profile id data in mongo user collection
-          new User({ googleId: profile.id })
-            .save() // save record
-            .then(user => done(null, user)); // second user instance from callback
-        }
-      });
+      const existingUser = await User.findOne({ googleId: profile.id });
+      // check if user exists
+      if (existingUser) {
+        // user has record
+        done(null, existingUser);
+      } else {
+        // user doesn't exist , need to generate record
+        // save google profile id data in mongo user collection
+        const user = await new User({ googleId: profile.id }).save(); // save record
+        done(null, user); // second user instance from callback
+      }
     }
   )
 );
