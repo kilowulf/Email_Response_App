@@ -11,6 +11,13 @@ render project deploy page:
 deployed url:
 https://mass-mailer-service.onrender.com/
 
+
+Stripe.com: payment processing service
+email: kilonow1275@gmail.com
+pass: NeoErunAlex0834@
+test credit card#: 4242 4242 4242 4242
+
+
 MongoDB Atlas:
 MassMailerCluster0
 user:kilonow1275

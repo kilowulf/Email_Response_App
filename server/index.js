@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
+const bodyParser = require("body-parser");
 // const keys = require("./config/keys");
 require("dotenv").config();
 // import mongo model class schema for user
@@ -32,6 +33,7 @@ db.on("disconnected", () => {
 
 const app = express();
 
+app.use(bodyParser.json());
 // middleware for cookie-session
 app.use(
   cookieSession({
@@ -48,6 +50,8 @@ app.use(passport.session());
 
 // calling function from auth_routes.js and passing app as argument
 require("./routes/auth_routes")(app);
+// require billing route
+require("./routes/billingRoutes")(app);
 
 // test route
 app.get("/", (req, res) => {

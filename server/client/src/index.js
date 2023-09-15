@@ -2,11 +2,13 @@
 import "materialize-css/dist/css/materialize.min.css";
 // Data layer control: boot up, Redux service
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 // import redux services
 // React component that can read changes to state / store. changes will cascade to children components
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
+// implements action creators that can return a function in place of an action
+// performs async operations
 import reduxThunk from "redux-thunk";
 
 import App from "./components/App";
@@ -27,3 +29,6 @@ root.render(
     <App />
   </Provider>
 );
+
+console.log("STRIPE_PUB_KEY", process.env.REACT_APP_STRIPE_PUB_KEY);
+console.log("Environment is", process.env.NODE_ENV);

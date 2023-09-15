@@ -1,3 +1,6 @@
 node_modules
 config/keys.js
+dev.js
 .env
+.env.development
+.env.production
