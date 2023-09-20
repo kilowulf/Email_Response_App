@@ -1,4 +1,5 @@
 // Authreducer: decides whether a user is logged in or not
+// allows us to access : this.props.auth - user model instance and its properties ie. credits
 import { FETCH_USER } from "../actions/types";
 export default function(state = null, action) {
   switch (action.type) {
